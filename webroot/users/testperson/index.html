@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    :root {
+        --width: min(400px, 90vw);
+
+    }
+
+    html {
+        overflow-y: scroll;
+        overflow-x: scroll;
+    }
+
+    body {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        font-size: 20px;
+        margin: 0;
+        margin-bottom: 20px;
+
+        overflow-y: visible;
+        overflow-x: visible;
+    }
+
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin: 0;
+    }
+
+    .pageview {
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+        /* margin-top: 20px; */
+        align-self: center;
+        width: min(1000px, 90vw)
+    }
+
+    .headbar,
+    .location {
+        /* padding-bottom: 10px;; */
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 5px;
+        justify-content: right;
+    }
+
+    .typednode {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 5px;
+    }
+
+    .iconmoney:empty {
+        display: none;
+    }
+
+
+    .location {
+        margin-top: 4px;
+        padding: 3px;
+        padding-left: 10px;
+        padding-right: 10px;
+        /* border-radius: 20px; */
+        border-top: solid black 1px;
+    }
+
+    .hidden {
+        display: none !important;
+    }
+
+    .transparent {
+        opacity: 60%;
+    }
+
+    .topcontrols {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: flex-end;
+        align-self: center;
+        justify-content: center;
+        /* justify-content: space-around; */
+        /* min-width: 700px; */
+        gap: 7px;
+    }
+
+    .upbutton {
+        min-width: 20px;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .grow {
+        display: flex;
+        flex-grow: 1;
+    }
+
+    .spaceholder {
+        visibility: hidden;
+    }
+
+    a:has(>.websitename) {
+        flex-grow: 1;
+    }
+
+    .websitename {
+        padding-right: 20px;
+    }
+
+    .containheader {
+        /* border: solid black 1px; */
+        border-top: none;
+        /* border-bottom-right-radius: 50px; */
+        /* border-bottom-left-radius: 50px; */
+        padding: 7px;
+        --padding-lr: 30px;
+        padding-left: var(--padding-lr);
+        padding-right: var(--padding-lr);
+    }
+
+    .containtopper {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+    }
+
+    .location {
+        /* padding-bottom: 10px; */
+        display: flex;
+        flex-flow: row wrap;
+        max-width: 500px;
+        align-content: center;
+        justify-content: center;
+    }
+
+    .linkbutton {
+        max-width: min(480px, 80vw);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-wrap: nowrap;
+        text-align: left;
+        float: left;
+    }
+
+    .location .linkbutton:nth-last-child(1) {
+        font-weight: bold;
+    }
+
+    .typednode {
+        /* filter:saturate(40%) brightness(86%) contrast(130%) */
+    }
+
+    .pagenote {
+        width: min(1000px, 90vw);
+        font-size: 17px;
+
+        padding: 10px;
+        /* font-style: italic; */
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .name {
+        padding-bottom: 10px;
+        padding-top: 10px;
+        text-decoration: underline;
+
+        max-width: 600px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-wrap: nowrap;
+        float: left;
+    }
+    .bold{
+        font-weight: bold;
+    }
+
+    .bottomarrows [href=" "] {
+        /* display: none; */
+        opacity: 20%;
+    }
+
+    .playingcontainer {
+        color: rgb(0, 133, 173) !important;
+        transition: 0s color !important;
+    }
+
+    .playingcontainer:not(.fadetonormal) {
+
+    }
+
+    .fadetonormal {
+        transition: 3s color;
+    }
+
+    .easybutton {
+        --padding-lr: 10px;
+        padding-left: var(--padding-lr);
+        padding-right: var(--padding-lr);
+        --padding-tb: 6px;
+        padding-top: var(--padding-tb);
+        padding-bottom: var(--padding-tb);
+        /* background: lightgrey; */
+        /* border-radius: 20px; */
+        outline: 1px solid black;
+
+        display: flex;
+        flex-flow: column;
+        height: 28px;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    .spacer {
+        width: 6px;
+    }
+
+    a:not(.normallinks a) {
+        text-decoration: unset;
+        color: unset;
+    }
+
+    a:not(.normallinks a):not(.entryicon):hover {
+        text-decoration: underline;
+    }
+
+    .bottomarrows {
+        display: flex;
+        flex-flow: row nowrap;
+        gap: 5px;
+        /* margin-top: 20px; */
+        margin: 0;
+    }
+
+    .bottomarrows * {
+        --padding-tb: 0 !important;
+    }
+
+
+    .debuginfo {
+        font-size: 10px;
+        color: grey;
+        align-self: center;
+        padding: 20px;
+        padding-top: 40px;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+    }
+
+    .pagetrix-persist {
+        align-content: center;
+        justify-content: center;
+        display: flex;
+    }
+</style>
+
+
+<script data-pagetrix-once>
+    // only happens once!
+    function navigateNextPrevPage() {
+        window.location.href = ""
+    }
+
+    window.addEventListener('keydown', e => {
+        if (e.repeat) return;
+        if (e.key == 'ArrowLeft') {
+            pagetrix.goto(document.querySelector('a:has(>.leftarrow)').getAttribute('href'))
+            // location.href = document.querySelector('a:has(>.leftarrow)').getAttribute('href')
+        } else if (e.key == 'ArrowRight') {
+            pagetrix.goto(document.querySelector('a:has(>.rightarrow)').getAttribute('href'))
+            // location.href = document.querySelector('a:has(>.rightarrow)').getAttribute('href')
+        } else if (e.key == 'Escape') {
+            e.stopPropagation()
+            e.preventDefault()
+            pagetrix.goto('..')
+            // location.href+=document.querySelector('a:has(>.nextarrow)').getAttribute('href')
+
+            // location.href+='/'+document.querySelector('a:has(>.backarrow)').getAttribute('href')
+        }
+    })
+
+    console.log('ello')
+</script>
+
+<script data-pagetrix-once src="/.engineassets/scripts/magicutils.js"></script>
+<script src="/.engineassets/scripts/magicmouse.js" data-pagetrix-once></script>
+
+
+
+
+
+<body>
+    <div class="pagetrix-persist" id="audioplayerwidget">
+    <div class="controls paused">
+        <div class="gobutton" onclick="audioplayer.toggle()">
+            <span class="playerplayingbuttonicon">⏸</span>
+            <span class="playerpausedbuttonicon">▶</span>
+
+        </div>
+        <div class="scrubber">
+            <input type="range" min="0" max="1000" value="0" class="audioprogress"
+                onchange="audioplayer.seektopercent(document.querySelector('.audioprogress').value/1000)">
+            <!-- <div class="circle">
+                    <svg height="10" width="10" xmlns="http://www.w3.org/2000/svg">
+                        <circle r="5" cx="5" cy="5" fill="black" />
+                    </svg>
+                </div>-->
+            <div class="line"></div>
+        </div>
+        <div class="time">
+            <span class="playercurrentime">2:04</span>/<span class="playerduration">3:43</span>
+        </div>
+    </div>
+
+    <style>
+#audioplayerwidget{
+    z-index: 10;
+}
+
+        .controls,
+        .controls * {
+            display: flex;
+            align-items: stretch;
+            /* font-family: Sn-pro; */
+            gap: 10px;
+            font-size: 16px;
+        }
+
+        .controls {
+            display: flex;
+            flex-flow: row;
+            outline: solid black 2px;
+            padding: 13px;
+            position: fixed;
+            bottom: 10px;
+            width: calc(var(--width) - 13px * 2);
+            background-color: white;
+        }
+
+        body {
+            margin-bottom: 80px;
+        }
+
+        .scrubber {
+            flex-grow: 1;
+            position: relative;
+            align-items: center;
+            flex-flow: row;
+        }
+
+        .controls * {
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gobutton {
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+        }
+
+        .playerpausedbuttonicon,
+        .playerplayingbuttonicon {
+            display: none;
+        }
+
+        .controls.playing .playerplayingbuttonicon {
+            display: inline-block;
+        }
+
+        /* todo rename .controls to .player */
+
+        .controls.paused .playerpausedbuttonicon {
+            display: inline-block;
+        }
+
+        .scrubber .audioprogress {
+            width: 100%;
+
+            background: none;
+            color: black;
+            appearance: none;
+            height: 100%;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        .audioprogress::-webkit-slider-thumb,
+        .audioprogress::-moz-range-thumb {
+            -webkit-appearance: none;
+            background: white;
+            border: solid 2px black;
+            --diameter: 12px;
+            height: var(--diameter);
+            width: var(--diameter);
+        }
+
+        .scrubber>.circle {
+            position: absolute;
+        }
+
+        .scrubber>.line {
+            width: 100%;
+            position: absolute;
+            height: 2px;
+            background-color: black;
+            z-index: -10;
+        }
+
+        .controls .time {
+            gap: 5px;
+        }
+    </style>
+
+</div>
+    <script src="/.engineassets/scripts/audioplayer.js" data-pagetrix-once></script>
+
+
+    <div class="containtopper">
+        <a href=".." class="hidden">
+
+            <div class="upbutton location hidden">
+                ↖ </div>
+        </a>
+        <div class="containheader">
+            <div class="headbar">
+                <a href="/"><span class="websitename bold">testperson</span></a>
+                
+            </div>
+
+            <div class="topcontrols">
+
+                <div class="location $shouldihide">
+                    
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="upbutton location spaceholder hidden">
+            ↖ </div>
+    </div>
+
+    <div class="bottomarrows">
+        <a href=".." class="$shouldbackbuttonhide">
+
+            <div class="easybutton hidden">
+                ↖ </div>
+        </a>
+
+        <div class="spacer"></div>
+        <a href="/.assets/." download>
+
+            <div class="easybutton downloadbutton hidden">
+                <img height=20 src="/.engineassets/images/download-button.svg" />
+            </div>
+        </a>
+        <a href="">
+
+            <div class="easybutton savebutton"> ☆ </div>
+        </a>
+        <a href="" onclick="print()">
+
+            <div class="easybutton printbutton"> 🖶 </div>
+        </a>
+        <div class="spacer"></div>
+        <a href=" ">
+            <div class="easybutton leftarrow"> ← </div>
+        </a>
+        <a href=" ">
+
+            <div class="easybutton rightarrow"> → </div>
+        </a>
+    </div>
+    <div class="pagenote"></div>
+
+    <div class="pageview">
+        <!-- <div class="leftarrow"> < </div> -->
+        <!-- <div class="rightarrow"> > </div> -->
+        <!DOCTYPE html>
+
+<head>
+    <link href="style.css" rel="stylesheet" />
+</head>
+<html>
+
+<body>
+    <div class="page">
+        <div class="article">
+            hello, this is my website. Welcome :)<br>
+        </div>
+</body>
+
+
+
+<style>
+    @font-face {
+        font-family: nyt-body;
+        src: url(fonts/cheltenham-normal-500.ttf);
+    }
+
+    @font-face {
+        font-family: nyt-title;
+        src: url(fonts/imperial-normal-700.ttf);
+    }
+
+    /* * {
+    font-size: 20px;;
+    font-family: nyt-body;
+} */
+    .title {
+        font-family: nyt-title;
+        font-size: 30px;
+        ;
+    }
+
+    .article {
+        /* white-space: pre-wrap; */
+    }
+
+    .page {
+        max-width: 800px;
+    }
+
+    body {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+    }
+</style>
+
+</html>
+    </div>
+    <br>
+
+
+    <div class="debuginfo">
+        
+            Mimetype: undefined<br>
+            Mediatype: unknown-directory<br>
+            Template: folderoffolders<br>
+            
+    </div>
+
+</body>
+<!-- todo update engineassets dir -->
+
+
+</html>
+
+<script>
+
+    // something that happens each time
+
+    audioplayeraddons.setPlayingContainers(true)
+</script>
+
+
+
+<script src="/.engineassets/scripts/pagetrix.js" data-pagetrix-once></script>
