@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-<script data-pagetrix-once src="/.engineassets/scripts/auth.js"></script>
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <title></title>
+    <title>notes.odt</title>
 </head>
 <style>
     :root {
@@ -51,8 +51,6 @@
 
     .headbar,
     .location {
-
-        min-width:400px;
         /* padding-bottom: 10px;; */
         display: flex;
         flex-direction: row;
@@ -155,10 +153,6 @@
     }
 
     .linkbutton {
-        display: flex;
-        flex-flow:row;
-        align-items: center;
-
         max-width: min(480px, 80vw);
         overflow: hidden;
         text-overflow: ellipsis;
@@ -386,7 +380,7 @@
     <div class="pagetrix-persist" id="audioplayerwidget">
     <div class="controls paused">
         <div class="gobutton" onclick="audioplayer.toggle()">
-            <span class="playerplayingbuttonicon">||</span>
+            <span class="playerplayingbuttonicon">⏸</span>
             <span class="playerpausedbuttonicon">▶</span>
 
         </div>
@@ -513,99 +507,8 @@
         .controls .time {
             gap: 5px;
         }
-
-
-
-
-        input[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 2px;
-  background: transparent;
-  cursor: pointer;
-}
-
-input[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 2px;
-  background: transparent;
-  cursor: pointer;
-}
-
-/* Chrome, Safari, Edge, Opera */
-input[type="range"]::-webkit-slider-runnable-track {
-  width: 100%;
-  height: 2px;
-  /* Left = Blue | Right = Black */
-  background: linear-gradient(to right, rgb(0, 133, 173) 0%, rgb(0, 133, 173) var(--progress, 0%), #000 var(--progress, 0%), #000 100%);
-  border-radius: 2px;
-}
-
-/* Firefox Track Logic */
-input[type="range"]::-moz-range-progress {
-  background-color: rgb(0, 133, 173); /* Blue on left */
-  height: 2px;
-}
-
-input[type="range"]::-moz-range-track {
-  background-color: #000; /* Black on right */
-  height: 2px;
-}
-
-/* --- THE BLACK CIRCLE (THUMB) --- */
-
-/* Chrome, Safari, Edge */
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  height: 16px;
-  width: 16px;
-  border-radius: 50%;
-  background: #000; /* Set circle to black */
-  margin-top: -7px; /* Centers 16px thumb on 2px track */
-  border: none;
-}
-
-/* Firefox */
-input[type="range"]::-moz-range-thumb {
-  height: 16px;
-  width: 16px;
-  border-radius: 50%;
-  background: #000; /* Set circle to black */
-  border: none;
-}
     </style>
 
-<script>const slider = document.querySelector('input[type="range"]');
-
-// 1. The core function that handles the visual "fill"
-function updateSliderVisuals() {
-  const min = slider.min || 0;
-  const max = slider.max || 100;
-  const value = slider.value;
-  
-  const percentage = (value - min) * 100 / (max - min);
-  slider.style.setProperty('--progress', percentage + '%');
-}
-
-// 2. Listen for manual user interaction (dragging/clicking)
-slider.addEventListener('input', updateSliderVisuals);
-
-// 3. How to update it via CODE
-function updateSliderByCode(newValue) {
-  slider.value = newValue;   // Sets the physical position
-  updateSliderVisuals();     // Sets the blue/black colors
-}
-
-// Initial call to set the color on page load
-updateSliderVisuals();
-
-// --- EXAMPLE USAGE ---
-// Instead of just doing: slider.value = 80;
-// Do this:
-</script>
 </div>
     <script src="/.engineassets/scripts/audioplayer.js" data-pagetrix-once></script>
 
@@ -621,14 +524,94 @@ updateSliderVisuals();
         </a>
         <div class="containheader">
             <div class="headbar">
-                <a href="/"><span class="websitename bold">testperson</span></a>
-                
+                <a href="/"><span class="websitename ">micahpowch</span></a>
+                <a class="linkbutton fadetonormal" href="/425136803_936948997879599_8744313475386395899_n.jpg_stpdst-jpg_e35_tt6&efgeyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0uaW1hZ2VfdXJsZ2VuLjEyNjZ4MTI2Ni5zZHIuZjI5MzUwLmRlZmF1bHRfaW1hZ2UuYzEifQ&_nc_htscontent-sea5-1.cdninstag.jpg" x-asseturl="/.assets/425136803_936948997879599_8744313475386395899_n.jpg_stpdst-jpg_e35_tt6&efgeyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0uaW1hZ2VfdXJsZ2VuLjEyNjZ4MTI2Ni5zZHIuZjI5MzUwLmRlZmF1bHRfaW1hZ2UuYzEifQ&_nc_htscontent-sea5-1.cdninstag.jpg"><span class="typednode">
+    <span class="iconmoney">
+            <span class="entryicon hi"><img loading="lazy" src="/.assets/425136803_936948997879599_8744313475386395899_n.jpg_stpdst-jpg_e35_tt6&efgeyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0uaW1hZ2VfdXJsZ2VuLjEyNjZ4MTI2Ni5zZHIuZjI5MzUwLmRlZmF1bHRfaW1hZ2UuYzEifQ&_nc_htscontent-sea5-1.cdninstag.jpg"/></span></span>
+    <span class="namemoney">425136803_936948997879599_8744313475386395899_n.jpg_stpdst-jpg_e35_tt6&efgeyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0uaW1hZ2VfdXJsZ2VuLjEyNjZ4MTI2Ni5zZHIuZjI5MzUwLmRlZmF1bHRfaW1hZ2UuYzEifQ&_nc_htscontent-sea5-1</span>
+</span></a> | <a class="linkbutton fadetonormal" href="/Breakfast With Your Pet Bear ｜ Bear About The House： Me & My Supersized Pet [IM0GEN_CNfI].mp4" x-asseturl="/.assets/Breakfast With Your Pet Bear ｜ Bear About The House： Me & My Supersized Pet [IM0GEN_CNfI].mp4"><span class="typednode">
+    <span class="iconmoney"><span class="entryicon">🎬</span></span>
+    <span class="namemoney">Breakfast With Your Pet Bear ｜ Bear About The House： Me & My Supersized Pet [IM0GEN_CNfI]</span>
+</span></a> | <a class="linkbutton fadetonormal" href="/Micah album" x-asseturl="/.assets/Micah album"><span class="typednode">
+    <span class="iconmoney"><span class="entryicon">💽</span></span>
+    <span class="namemoney">Micah album</span>
+</span></a> | <a class="linkbutton fadetonormal" href="/Screenshot From 2026-02-06 15-36-54.png" x-asseturl="/.assets/Screenshot From 2026-02-06 15-36-54.png"><span class="typednode">
+    <span class="iconmoney">
+            <span class="entryicon hi"><img loading="lazy" src="/.assets/Screenshot From 2026-02-06 15-36-54.png"/></span></span>
+    <span class="namemoney">Screenshot From 2026-02-06 15-36-54</span>
+</span></a> | <a class="linkbutton fadetonormal" href="/goob" x-asseturl="/.assets/goob"><span class="typednode">
+    <span class="iconmoney">
+            <span class="entryicon hi"><img loading="lazy" src="/.assets/goob/milk.jpg"/></span></span>
+    <span class="namemoney">goob</span>
+</span></a> | <a class="linkbutton fadetonormal" href="/hello" x-asseturl="/.assets/hello"><span class="typednode">
+    <span class="iconmoney"><span class="entryicon">📁</span></span>
+    <span class="namemoney">hello</span>
+</span></a> | <a class="linkbutton fadetonormal" href="/maeve" x-asseturl="/.assets/maeve"><span class="typednode">
+    <span class="iconmoney">
+            <span class="entryicon hi"><img loading="lazy" src="/.assets/maeve/cover.jpg"/></span></span>
+    <span class="namemoney">maeve</span>
+</span></a> | <a class="linkbutton fadetonormal" href="/milk.jpg" x-asseturl="/.assets/milk.jpg"><span class="typednode">
+    <span class="iconmoney">
+            <span class="entryicon hi"><img loading="lazy" src="/.assets/milk.jpg"/></span></span>
+    <span class="namemoney">milk</span>
+</span></a> | <a class="linkbutton fadetonormal" href="/oldindex.html" x-asseturl="/.assets/oldindex.html"><span class="typednode">
+    <span class="iconmoney"><span class="entryicon">🖥️</span></span>
+    <span class="namemoney">oldindex</span>
+</span></a> | <a class="linkbutton fadetonormal" href="/poopy" x-asseturl="/.assets/poopy"><span class="typednode">
+    <span class="iconmoney"><span class="entryicon">📁</span></span>
+    <span class="namemoney">poopy</span>
+</span></a> | <a class="linkbutton fadetonormal" href="/poppy" x-asseturl="/.assets/poppy">
+        <strong>
+            <span class="typednode">
+    <span class="iconmoney"><span class="entryicon">📁</span></span>
+    <span class="namemoney">poppy</span>
+</span>
+        </strong>
+        </a> | <a class="linkbutton fadetonormal" href="/siberianbeardog_1691337640_3163491875101068455_6638884613.jpg" x-asseturl="/.assets/siberianbeardog_1691337640_3163491875101068455_6638884613.jpg"><span class="typednode">
+    <span class="iconmoney">
+            <span class="entryicon hi"><img loading="lazy" src="/.assets/siberianbeardog_1691337640_3163491875101068455_6638884613.jpg"/></span></span>
+    <span class="namemoney">siberianbeardog_1691337640_3163491875101068455_6638884613</span>
+</span></a> | <a class="linkbutton fadetonormal" href="/siberianbeardog_1691337640_3163491875109424060_6638884613.jpg" x-asseturl="/.assets/siberianbeardog_1691337640_3163491875109424060_6638884613.jpg"><span class="typednode">
+    <span class="iconmoney">
+            <span class="entryicon hi"><img loading="lazy" src="/.assets/siberianbeardog_1691337640_3163491875109424060_6638884613.jpg"/></span></span>
+    <span class="namemoney">siberianbeardog_1691337640_3163491875109424060_6638884613</span>
+</span></a> | <a class="linkbutton fadetonormal" href="/siberianbeardog_1691688887_3166438346615975865_6638884613.jpg" x-asseturl="/.assets/siberianbeardog_1691688887_3166438346615975865_6638884613.jpg"><span class="typednode">
+    <span class="iconmoney">
+            <span class="entryicon hi"><img loading="lazy" src="/.assets/siberianbeardog_1691688887_3166438346615975865_6638884613.jpg"/></span></span>
+    <span class="namemoney">siberianbeardog_1691688887_3166438346615975865_6638884613</span>
+</span></a> | <a class="linkbutton fadetonormal" href="/siberianbeardog_1704306519_3272277579670359849_6638884613.mp4" x-asseturl="/.assets/siberianbeardog_1704306519_3272277579670359849_6638884613.mp4"><span class="typednode">
+    <span class="iconmoney"><span class="entryicon">🎬</span></span>
+    <span class="namemoney">siberianbeardog_1704306519_3272277579670359849_6638884613</span>
+</span></a> | <a class="linkbutton fadetonormal" href="/study music" x-asseturl="/.assets/study music"><span class="typednode">
+    <span class="iconmoney">
+            <span class="entryicon hi"><img loading="lazy" src="/.assets/study music/fatrat.webp"/></span></span>
+    <span class="namemoney">study music</span>
+</span></a> | <a class="linkbutton fadetonormal" href="/study%20music" x-asseturl="/.assets/study%20music"><span class="typednode">
+    <span class="iconmoney"><span class="entryicon">💽</span></span>
+    <span class="namemoney">study%20music</span>
+</span></a> | <a class="linkbutton fadetonormal" href="/undefined" x-asseturl="/.assets/undefined"><span class="typednode">
+    <span class="iconmoney"><span class="entryicon">📁</span></span>
+    <span class="namemoney">undefined</span>
+</span></a> | <a class="linkbutton fadetonormal" href="/uploads" x-asseturl="/.assets/uploads"><span class="typednode">
+    <span class="iconmoney">
+            <span class="entryicon hi"><img loading="lazy" src="/.assets/uploads/Screenshot From 2026-02-06 00-53-58.png"/></span></span>
+    <span class="namemoney">uploads</span>
+</span></a> | <a class="linkbutton fadetonormal" href="/weewee" x-asseturl="/.assets/weewee"><span class="typednode">
+    <span class="iconmoney"><span class="entryicon">📁</span></span>
+    <span class="namemoney">weewee</span>
+</span></a>
             </div>
 
             <div class="topcontrols">
 
                 <div class="location $shouldihide">
-                    
+                    ╱<a class="linkbutton locationbutton fadetonormal" href="/poppy" x-asseturl="/.assets/poppy"><span class="typednode">
+    <span class="iconmoney"><span class="entryicon">📁</span></span>
+    <span class="namemoney">poppy</span>
+</span></a>╱<a class="linkbutton locationbutton fadetonormal" href="/poppy/notes.odt" x-asseturl="/.assets/poppy/notes.odt"><span class="typednode">
+    <span class="iconmoney"><span class="entryicon">📄</span></span>
+    <span class="namemoney">notes</span>
+</span></a>
                 </div>
 
             </div>
@@ -642,14 +625,14 @@ updateSliderVisuals();
     <div class="bottomarrows">
         <a href=".." class="$shouldbackbuttonhide">
 
-            <div class="easybutton hidden">
+            <div class="easybutton dummy">
                 ↖ </div>
         </a>
 
         <div class="spacer"></div>
-        <a href="/.assets/." download>
+        <a href="/.assets/poppy/notes.odt" download>
 
-            <div class="easybutton downloadbutton hidden">
+            <div class="easybutton downloadbutton ">
                 <img height=20 src="/.engineassets/images/download-button.svg" />
             </div>
         </a>
@@ -662,7 +645,7 @@ updateSliderVisuals();
             <div class="easybutton printbutton"> 🖶 </div>
         </a>
         <div class="spacer"></div>
-        <a href=" ">
+        <a href="/poppy/doc.odt">
             <div class="easybutton leftarrow"> ← </div>
         </a>
         <a href=" ">
@@ -675,59 +658,40 @@ updateSliderVisuals();
     <div class="pageview">
         <!-- <div class="leftarrow"> < </div> -->
         <!-- <div class="rightarrow"> > </div> -->
-        <!DOCTYPE html>
+        undefined<script>/**
+ * Finds all <p> elements where the text has wrapped to 2 or more lines.
+ */
+function getWrappedParagraphs() {
+  const paragraphs = document.querySelectorAll('.document p');
+  const wrappedElements = [];
 
-<head>
-    <link href="style.css" rel="stylesheet" />
-</head>
-<html>
-
-<body>
-    <div class="page">
-        <div class="article">
-            hello, this is my website. Welcome :)<br>
-        </div>
-</body>
-
-
-
-<style>
-    @font-face {
-        font-family: nyt-body;
-        src: url(fonts/cheltenham-normal-500.ttf);
+  paragraphs.forEach((p) => {
+    // Get the total height of the element and the height of a single line
+    const style = window.getComputedStyle(p);
+    const height = p.offsetHeight;
+    
+    // Parse line-height. If 'normal', we estimate based on font-size.
+    let lineHeight = parseFloat(style.lineHeight);
+    if (isNaN(lineHeight)) {
+      lineHeight = parseFloat(style.fontSize) * 1.2; // Standard browser default ratio
     }
+    console.log(style)
+    console.log(style.padding)
 
-    @font-face {
-        font-family: nyt-title;
-        src: url(fonts/imperial-normal-700.ttf);
+    // If height is significantly greater than line-height, it has wrapped
+    if (height > lineHeight + (Number.parseInt(style.paddingBlock)*2)+2) { // +2px buffer for sub-pixel rendering
+      wrappedElements.push(p);
     }
+  });
 
-    /* * {
-    font-size: 20px;;
-    font-family: nyt-body;
-} */
-    .title {
-        font-family: nyt-title;
-        font-size: 30px;
-        ;
-    }
+  return wrappedElements;
+}
 
-    .article {
-        /* white-space: pre-wrap; */
-    }
-
-    .page {
-        max-width: 800px;
-    }
-
-    body {
-        display: flex;
-        flex-flow: column;
-        align-items: center;
-    }
-</style>
-
-</html>
+// Execution
+const wrappedPs = getWrappedParagraphs();
+console.log('Wrapped Paragraphs:', wrappedPs);
+wrappedPs.forEach(e=>e.classList.add('wrapp'))</script>
+    
     </div>
     <br>
 
@@ -735,9 +699,9 @@ updateSliderVisuals();
 
     <div class="debuginfo">
         
-            Mimetype: undefined<br>
-            Mediatype: unknown-directory<br>
-            Template: folderoffolders<br>
+            Mimetype: application/vnd.oasis.opendocument.text<br>
+            Mediatype: unknown-file<br>
+            Template: docx<br>
             
     </div>
 

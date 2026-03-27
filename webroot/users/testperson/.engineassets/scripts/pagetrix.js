@@ -1,5 +1,5 @@
 /**
- * Pagetrix v4.3 - Network Priority & High-Speed Progress
+ * Pagetrix v5.3 - Multi-Image Instance Fix & Priority Fetching
  */
 const pagetrix = (() => {
   if (window.__PAGETRIX_ACTIVE__ && !window.__PAGETRIX_SWAPPING__) return window.pagetrix;
@@ -14,6 +14,7 @@ const pagetrix = (() => {
     isSlow: false,
     progressBar: null,
     progressTimer: null,
+    glideTimeout: null,
     currentPercent: 0
   };
 
@@ -56,14 +57,17 @@ const pagetrix = (() => {
 
   const startGlide = () => {
     clearInterval(state.progressTimer);
-    updateProgress(5);
-    state.progressTimer = setInterval(() => {
-      if (state.currentPercent < 98) {
-        updateProgress(state.currentPercent + 0.5);
-      } else {
-        clearInterval(state.progressTimer);
-      }
-    }, 100);
+    clearTimeout(state.glideTimeout);
+    state.glideTimeout = setTimeout(() => {
+      updateProgress(5);
+      state.progressTimer = setInterval(() => {
+        if (state.currentPercent < 98) {
+          updateProgress(state.currentPercent + 0.5);
+        } else {
+          clearInterval(state.progressTimer);
+        }
+      }, 100);
+    }, 500);
   };
 
   const resolveURL = (rawHref) => {
@@ -83,50 +87,49 @@ const pagetrix = (() => {
     } catch (e) { return null; }
   };
 
-  const goto = async (rawUrl) => {
+  const goto = async (rawUrl, bypassCache = false, keepScroll = false) => {
     const url = resolveURL(rawUrl);
     if (!url || url.origin !== window.location.origin) {
       if (url) window.location.href = url.href;
       return;
     }
 
-    // Immediately kill any active background fetches
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+
     state.controller.abort();
     state.controller = new AbortController();
     state.preloadQueue.delete(url.href);
 
     const cachedHtml = state.cache.get(url.href);
-    if (cachedHtml) {
-      updateProgress(100);
-      performSwap(cachedHtml, url.href);
+    if (cachedHtml && !bypassCache) {
+      performSwap(cachedHtml, url.href, keepScroll ? { x: scrollX, y: scrollY } : null);
       return;
     }
 
     startGlide();
 
     try {
-      // HIGH PRIORITY FETCH: Takes precedence over images/media
       const response = await fetch(url.href, { 
         signal: state.controller.signal,
         priority: 'high',
-        importance: 'high' // Legacy support for older Chromium
+        importance: 'high',
+        cache: bypassCache ? 'no-cache' : 'default'
       });
       
-      if (!response.ok) {
-        console.log('BROKEN!')
-        throw new Error();
-        return;
-      }
+      if (!response.ok) throw new Error();
       
       const html = await response.text();
       state.cache.set(url.href, html);
       
+      clearTimeout(state.glideTimeout);
       clearInterval(state.progressTimer);
       updateProgress(100);
       
-      setTimeout(() => performSwap(html, url.href), 50);
+      setTimeout(() => performSwap(html, url.href, keepScroll ? { x: scrollX, y: scrollY } : null), 50);
     } catch (e) {
       if (e.name !== 'AbortError') {
+        clearTimeout(state.glideTimeout);
         clearInterval(state.progressTimer);
         updateProgress(0);
         window.location.href = url.href;
@@ -134,11 +137,16 @@ const pagetrix = (() => {
     }
   };
 
-  const performSwap = (html, url) => {
+  const reload = () => goto(window.location.href, true, true);
+
+  const performSwap = (html, url, scrollPos = null) => {
     if (window.__PAGETRIX_SWAPPING__) return;
     window.__PAGETRIX_SWAPPING__ = true;
 
     const persistentNodes = Array.from(document.querySelectorAll('.pagetrix-persist')).filter(n => n.id);
+    const oldImages = Array.from(document.images);
+    const usedImages = new Set(); // TRACKING USED NODES
+
     const parser = new DOMParser();
     const newDoc = parser.parseFromString(html, 'text/html');
     const newTitle = newDoc.querySelector('title')?.innerText;
@@ -146,7 +154,20 @@ const pagetrix = (() => {
     window.history.pushState(null, '', url);
     if (newTitle) document.title = newTitle;
     
-    document.documentElement.innerHTML = html;
+    newDoc.querySelectorAll('img').forEach(newImg => {
+      // Find a match that hasn't been used yet in this swap
+      const match = oldImages.find(oldImg => oldImg.src === newImg.src && !usedImages.has(oldImg));
+      if (match) {
+        usedImages.add(match); // Mark as claimed
+        if (match.complete) {
+            newImg.replaceWith(match);
+        } else {
+            newImg.src = match.src;
+        }
+      }
+    });
+
+    document.body.replaceWith(newDoc.body);
     createProgressBar();
 
     persistentNodes.forEach(oldNode => {
@@ -154,8 +175,13 @@ const pagetrix = (() => {
       if (newNodePlaceholder) newNodePlaceholder.replaceWith(oldNode);
     });
 
-    executeScripts(document.documentElement);
-    window.scrollTo(0, 0);
+    executeScripts(document.body); 
+
+    if (scrollPos) {
+      window.scrollTo(scrollPos.x, scrollPos.y);
+    } else {
+      window.scrollTo(0, 0);
+    }
     
     window.__PAGETRIX_SWAPPING__ = false;
     state.preloadQueue.clear(); 
@@ -207,14 +233,8 @@ const pagetrix = (() => {
     
     state.preloadQueue.add(url.href);
     try {
-      // PRELOADS use 'low' priority so they don't lag out current media
-      const response = await fetch(url.href, { 
-        signal: state.controller.signal,
-        priority: 'low' 
-      });
-      if (response.ok) {
-        state.cache.set(url.href, await response.text());
-      }
+      const response = await fetch(url.href, { signal: state.controller.signal, priority: 'low' });
+      if (response.ok) state.cache.set(url.href, await response.text());
     } catch (e) {
       state.preloadQueue.delete(url.href);
     }
@@ -250,7 +270,7 @@ const pagetrix = (() => {
     if (url) fetchPage(url.href);
   };
 
-  return { init, goto };
+  return { init, goto, reload };
 })();
 
 window.pagetrix = pagetrix;

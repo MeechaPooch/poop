@@ -32,6 +32,8 @@ window.audioplayer = {
     play: () => {
         audioplayer.audio.play()
         audioplayer.runAllListeners()
+
+        playerelement.classList.add('showme')
     },
     pause: () => {
         audioplayer.audio.pause()
@@ -145,6 +147,8 @@ audioplayer.audio.addEventListener('timeupdate', (e) => {
     audioprogress.value = percent
 
     playerelement.querySelector('.time .playercurrentime').innerText = magicutils.secstohms(audioplayer.audio.currentTime)
+    updateSliderVisuals()
+
 }, 100)
 audioplayer.audio.addEventListener('durationchange', (e) => {
     playerelement.querySelector('.time .playerduration').innerText = magicutils.secstohms(audioplayer.audio.duration)
