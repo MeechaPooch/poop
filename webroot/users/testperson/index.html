@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<script data-pagetrix-once src="/.engineassets/scripts/auth.js"></script>
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
@@ -49,10 +49,36 @@
         width: min(1000px, 90vw)
     }
 
+    :root{
+        --sillywidth:100px;
+    }
+    .webpage {
+
+    }
+.containtopper{
+    max-width:max(440px, calc(100vw - var(--sillywidth) * 2))
+}
+.webpage .easybutton {
+    padding:2px;
+}
+    .topright,.topleft{
+        width:var(--sillywidth);
+        position:fixed;
+        margin:10px;
+    }
+    .topleft{
+        left:0;
+        top:0;
+    }
+    .topright{
+        right:0;
+        top:0;
+    }
+
     .headbar,
     .location {
 
-        min-width:400px;
+        min-width: 400px;
         /* padding-bottom: 10px;; */
         display: flex;
         flex-direction: row;
@@ -156,7 +182,7 @@
 
     .linkbutton {
         display: flex;
-        flex-flow:row;
+        flex-flow: row;
         align-items: center;
 
         max-width: min(480px, 80vw);
@@ -198,7 +224,8 @@
         text-wrap: nowrap;
         float: left;
     }
-    .bold{
+
+    .bold {
         font-weight: bold;
     }
 
@@ -212,9 +239,7 @@
         transition: 0s color !important;
     }
 
-    .playingcontainer:not(.fadetonormal) {
-
-    }
+    .playingcontainer:not(.fadetonormal) {}
 
     .fadetonormal {
         transition: 3s color;
@@ -243,35 +268,37 @@
         width: 6px;
     }
 
-    a:not(.normallinks a) {
+    a:not(.normallink, .normallink a) {
         text-decoration: unset;
         color: unset;
     }
 
-    a:not(.normallinks a):not(.entryicon):hover {
+    a:not(.normallink, .normallink a):not(.entryicon):hover {
         text-decoration: underline;
     }
-    .containheader .entryicon>img{
-        height:1.5em;
-        width:1.5em;
-        --undospace:-0.25em;
-        margin-top:var(--undospace);
-        margin-bottom:var(--undospace);
+
+    .containheader .entryicon>img {
+        height: 1.5em;
+        width: 1.5em;
+        --undospace: -0.25em;
+        margin-top: var(--undospace);
+        margin-bottom: var(--undospace);
     }
 
 
     /* The initial state of the page */
-#app-view {
-  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
-  opacity: 1;
-  transform: translateY(0);
-}
+    #app-view {
+        transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+        opacity: 1;
+        transform: translateY(0);
+    }
 
-/* The state during the swap */
-.pagetrix-swapping #app-view {
-  opacity: 0;
-  transform: translateY(10px); /* Slight slide down effect */
-}
+    /* The state during the swap */
+    .pagetrix-swapping #app-view {
+        opacity: 0;
+        transform: translateY(10px);
+        /* Slight slide down effect */
+    }
 
     .bottomarrows {
         display: flex;
@@ -308,13 +335,13 @@
 
 
 
-     /* The hidden overlay */
+    /* The hidden overlay */
     #drop-zone {
         position: fixed;
         top: 0;
         left: 0;
-        bottom:0;
-        right:0;
+        bottom: 0;
+        right: 0;
         /* width: 100vw;
         height: 100vh; */
         background: rgba(245, 135, 0, 0.8);
@@ -339,14 +366,13 @@
     }
 
 
-    .newitem{
-        position:fixed;
-        right:20vw;
-        bottom:30px;
+    .newitem {
+        position: fixed;
+        right: 20vw;
+        bottom: 30px;
         z-index: 100;
     }
 </style>
-
 
 <script data-pagetrix-once>
     // only happens once!
@@ -619,6 +645,11 @@ updateSliderVisuals();
             <div class="upbutton location hidden">
                 ↖ </div>
         </a>
+
+ <div id="topleft" class="pagetrix-persist webpage topleft">
+            <a href="https://micahpowch.com" class="easybutton"> < explore</a>
+        </div>
+
         <div class="containheader">
             <div class="headbar">
                 <a href="/"><span class="websitename bold">testperson</span></a>
@@ -627,19 +658,25 @@ updateSliderVisuals();
 
             <div class="topcontrols">
 
-                <div class="location $shouldihide">
+                <div class="location $shouldihide ">
                     
                 </div>
 
             </div>
 
 
+
         </div>
+
+        <div id="topright" class="pagetrix-persist website topright">
+            <a href="https://login.micahpowch.com/signup.html" class="easybutton">sign up</a>
+        </div>
+
         <div class="upbutton location spaceholder hidden">
             ↖ </div>
     </div>
 
-    <div class="bottomarrows">
+    <div class="bottomarrows ">
         <a href=".." class="$shouldbackbuttonhide">
 
             <div class="easybutton hidden">
@@ -747,6 +784,11 @@ updateSliderVisuals();
 
 
 </html>
+
+<script data-pagetrix-once src="/.engineassets/scripts/cookie.js"></script>
+<script data-pagetrix-once src="/.engineassets/scripts/authlib.js"></script>
+<script data-pagetrix-once src="/.engineassets/scripts/doauth.js"></script>
+
 
 <script>
 

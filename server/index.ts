@@ -10,7 +10,7 @@ import e from 'express'
 import asynchandler from 'express-async-handler'
 let sanitize: any = undefined;
 import bodyParser from 'body-parser'
-import { createUser, doesUserExist } from './functions.ts'
+import { createUser, doesUserExist, login, validateToken } from './functions.ts'
 
 {
     (async () => {
@@ -114,7 +114,7 @@ app.post('/newuser',async (req,res)=>{
 
     username = username.trim()
     if(username=='') {
-        res.send(400).send('cannot have blank username')
+        res.sendStatus(400).send('cannot have blank username')
         return;
     }
 
@@ -129,6 +129,24 @@ app.post('/newuser',async (req,res)=>{
     await run(username)
 
     res.status(200).send(username);
+})
+app.post('/login',(req,res)=>{
+    let {username,password} = req.body;
+
+    let token = login(username,password);
+
+    if(!token) {
+        res.sendStatus(401)
+        return;
+    }
+    res.send({
+        username,
+        token
+    })
+})
+app.post('/validatetoken',(req,res)=>{
+    let {username,token} = req.body;
+    res.send(validateToken(username,token))
 })
 
 console.log('hi')
