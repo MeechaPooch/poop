@@ -18,6 +18,10 @@ const pagetrix = (() => {
     currentPercent: 0
   };
 
+  const clearCache = () =>{
+    state.cache = new Map();
+  }
+
   const createProgressBar = () => {
     let bar = document.getElementById('pagetrix-progress');
     if (!bar) {
@@ -145,7 +149,7 @@ const pagetrix = (() => {
 
     const persistentNodes = Array.from(document.querySelectorAll('.pagetrix-persist')).filter(n => n.id);
     const oldImages = Array.from(document.images);
-    const usedImages = new Set(); // TRACKING USED NODES
+    const usedImages = new Set(); 
 
     const parser = new DOMParser();
     const newDoc = parser.parseFromString(html, 'text/html');
@@ -155,10 +159,9 @@ const pagetrix = (() => {
     if (newTitle) document.title = newTitle;
     
     newDoc.querySelectorAll('img').forEach(newImg => {
-      // Find a match that hasn't been used yet in this swap
       const match = oldImages.find(oldImg => oldImg.src === newImg.src && !usedImages.has(oldImg));
       if (match) {
-        usedImages.add(match); // Mark as claimed
+        usedImages.add(match);
         if (match.complete) {
             newImg.replaceWith(match);
         } else {
@@ -250,10 +253,23 @@ const pagetrix = (() => {
     document.addEventListener('click', e => {
       const link = e.target.closest('a:not([download])');
       if (!link?.href || link.target === '_blank' || e.metaKey || e.ctrlKey) return;
-      const url = resolveURL(link.getAttribute('href'));
-      if (url && url.origin === window.location.origin) {
+      
+      const targetUrl = resolveURL(link.getAttribute('href'));
+      if (targetUrl && targetUrl.origin === window.location.origin) {
         e.preventDefault();
-        goto(url.href);
+        
+        // ADJACENCY CHECK
+        const currentPathParts = window.location.pathname.split('/').filter(Boolean);
+        const targetPathParts = targetUrl.pathname.split('/').filter(Boolean);
+        
+        // Remove the last segment of each to get the "parent" path
+        const currentParent = currentPathParts.slice(0, -1).join('/');
+        const targetParent = targetPathParts.slice(0, -1).join('/');
+        
+        const isAdjacent = currentParent === targetParent && currentPathParts.length === targetPathParts.length;
+        
+        goto(targetUrl.href, false, true);
+        // goto(targetUrl.href, false, isAdjacent);
       }
     }, true);
   };
@@ -270,7 +286,7 @@ const pagetrix = (() => {
     if (url) fetchPage(url.href);
   };
 
-  return { init, goto, reload };
+  return { init, goto, reload, clearCache };
 })();
 
 window.pagetrix = pagetrix;

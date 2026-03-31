@@ -11,6 +11,8 @@ import asynchandler from 'express-async-handler'
 let sanitize: any = undefined;
 import bodyParser from 'body-parser'
 import { createUser, doesUserExist, login, validateToken } from './functions.ts'
+import { startWatching } from './watcher.ts'
+import { deleteFile, uploadFile } from './filefunctions.ts'
 
 {
     (async () => {
@@ -19,27 +21,12 @@ import { createUser, doesUserExist, login, validateToken } from './functions.ts'
     })()
 }
 
-async function uploadFile(filepath: string, username: string, file: Express.Multer.File) {
-    if (!sanitize) sanitize = (await import('path-sanitizer')).default
 
-    filepath = sanitize(filepath)
-    process.chdir(deployFolder)
-
-    let fullfilepath = userdirsPath + path.sep + username + path.sep + filepath;
-
-   // Ensure the directory exists
-    const directory = path.dirname(fullfilepath);
-    if (!fs.existsSync(directory)) {
-        fs.mkdirSync(directory, { recursive: true });
-    }
-
-    return fsp.writeFile(fullfilepath, file.buffer);
-}
 
 // replace with only regenerating specific files
-async function regenerateUser(username: string) {
+async function regenerateUser(username: string, filepath?: string) {
     try {
-        return await run(username)
+        return await run(username, filepath)
     } catch (e) {
         console.error(e)
     }
@@ -70,18 +57,31 @@ app.get('/test', (req, res) => {
 //
 app.post('/newfolder', async (req, res) => {
     let username = req.body.username
+    let token = req.body.token
+
+    if (!validateToken(username, token)) {
+        res.status(509).send('unauthorized')
+        return;
+    }
+
     let where: string = decodeURIComponent(req.body.location) as string
     where = sanitize(where);
     let fullpath = userdirsPath + '/' + username + '/' + where;
-    console.log('making',fullpath)
-    fs.mkdirSync(fullpath);
-    await regenerateUser(username)
+    console.log('making', fullpath)
+    fs.mkdirSync(fullpath,{mode:0o770});
+    await regenerateUser(username, where.split('/').filter(Boolean).slice(0, -1).join('/'))
     res.send('reload')
 })
 
 app.post('/upload', upload.single('file'), (async (req, res, next) => {
     // in future, resolve username using backend authentication. store token in user directory?!?!?!?! YES. ;P
-    let { filepath, username } = req.body; // The path specified by the user
+    let { filepath, username, token } = req.body; // The path specified by the user
+
+    if (!validateToken(username, token)) {
+        res.status(509).send('unauthorized')
+        return;
+    }
+
     const file = req.file;
 
     filepath = decodeURIComponent(filepath)
@@ -101,7 +101,7 @@ app.post('/upload', upload.single('file'), (async (req, res, next) => {
 
     await uploadFile(filepath, username, file)
 
-    await regenerateUser(username)
+    await regenerateUser(username, filepath)
 
     res.send('reload').sendStatus(200)
 
@@ -109,33 +109,52 @@ app.post('/upload', upload.single('file'), (async (req, res, next) => {
 
 }));
 
-app.post('/newuser',async (req,res)=>{
-    let {username,password,email} = req.body;
+app.post('/delete', (async (req, res) => {
+    let { filepath, username, token } = req.body; // The path specified by the user
+
+    if (!validateToken(username, token)) {
+        res.status(401).send('unauthorized')
+        return;
+    }
+
+    filepath = decodeURIComponent(filepath)
+    console.log('recieved a file!', filepath)
+
+    await deleteFile(filepath, username);
+    await regenerateUser(username, filepath);
+
+    res.send('reload').sendStatus(200)
+
+}))
+
+
+app.post('/newuser', async (req, res) => {
+    let { username, password, email } = req.body;
 
     username = username.trim()
-    if(username=='') {
+    if (username == '') {
         res.sendStatus(400).send('cannot have blank username')
         return;
     }
 
-    if(doesUserExist(username)) {
+    if (doesUserExist(username)) {
         res.send(409).send('user already exists')
         return;
     }
 
     //otherwise
 
-    await createUser(username,password)
+    await createUser(username, password)
     await run(username)
 
     res.status(200).send(username);
 })
-app.post('/login',(req,res)=>{
-    let {username,password} = req.body;
+app.post('/login', (req, res) => {
+    let { username, password } = req.body;
 
-    let token = login(username,password);
+    let token = login(username, password);
 
-    if(!token) {
+    if (!token) {
         res.sendStatus(401)
         return;
     }
@@ -144,13 +163,17 @@ app.post('/login',(req,res)=>{
         token
     })
 })
-app.post('/validatetoken',(req,res)=>{
-    let {username,token} = req.body;
-    res.send(validateToken(username,token))
+app.post('/validatetoken', (req, res) => {
+    let { username, token } = req.body;
+    res.send(validateToken(username, token))
 })
 
 console.log('hi')
+//important
+startWatching()
+
 app.listen(7070, (error) => {
     if (error) console.log(error)
     else console.log('Server running on http://localhost:7070')
 });
+

@@ -49,30 +49,35 @@
         width: min(1000px, 90vw)
     }
 
-    :root{
-        --sillywidth:100px;
+    :root {
+        --sillywidth: 100px;
     }
-    .webpage {
 
+    .webpage {}
+
+    .containtopper {
+        max-width: max(440px, calc(100vw - var(--sillywidth) * 2))
     }
-.containtopper{
-    max-width:max(440px, calc(100vw - var(--sillywidth) * 2))
-}
-.webpage .easybutton {
-    padding:2px;
-}
-    .topright,.topleft{
-        width:var(--sillywidth);
-        position:fixed;
-        margin:10px;
+
+    .webpage .easybutton {
+        padding: 2px;
     }
-    .topleft{
-        left:0;
-        top:0;
+
+    .topright,
+    .topleft {
+        width: var(--sillywidth);
+        position: fixed;
+        margin: 10px;
     }
-    .topright{
-        right:0;
-        top:0;
+
+    .topleft {
+        left: 0;
+        top: 0;
+    }
+
+    .topright {
+        right: 0;
+        top: 0;
     }
 
     .headbar,
@@ -330,10 +335,38 @@
         display: flex;
     }
 
+    .ITEM {
+        position: relative;
+    }
 
+    .delete-button {
+        z-index:10;
+        display: flex;
+        opacity: 0%;
+        transition:0.1s;
 
+        --dimension: 30px;
 
+        width: var(--dimension);
+        height: var(--dimension);
 
+        position: absolute;
+
+        top: calc(-0.5 * var(--dimension));
+        right: calc(-0.5 * var(--dimension));
+    }
+
+    .ITEM:hover .delete-button {
+        opacity: 100%;        
+    }
+    .delete-button:hover {
+        scale:110%;
+        filter:brightness(110%);
+    }
+
+    .notmysite .drop-zone {
+        display: none !important;
+    }
 
     /* The hidden overlay */
     #drop-zone {
@@ -401,8 +434,8 @@
     console.log('ello')
 </script>
 
-<script data-pagetrix-once src="/.engineassets/scripts/magicutils.js"></script>
-<script src="/.engineassets/scripts/magicmouse.js" data-pagetrix-once></script>
+<script data-pagetrix-once src="/.engine/scripts/magicutils.js"></script>
+<script src="/.engine/scripts/magicmouse.js" data-pagetrix-once></script>
 
 
 
@@ -633,9 +666,9 @@ updateSliderVisuals();
 // Do this:
 </script>
 </div>
-    <script src="/.engineassets/scripts/audioplayer.js" data-pagetrix-once></script>
+    <script src="/.engine/scripts/audioplayer.js" data-pagetrix-once></script>
 
-    <div id="drop-zone" class="pagetrix-persist">
+    <div id="drop-zone" class="pagetrix-persist drop-zone">
         <h1>Upload File</h1>
     </div>
 
@@ -646,8 +679,9 @@ updateSliderVisuals();
                 ↖ </div>
         </a>
 
- <div id="topleft" class="pagetrix-persist webpage topleft">
-            <a href="https://micahpowch.com" class="easybutton"> < explore</a>
+        <div id="topleft" class="pagetrix-persist webpage topleft">
+            <a href="https://micahpowch.com" class="easybutton">
+                < explore</a>
         </div>
 
         <div class="containheader">
@@ -687,7 +721,7 @@ updateSliderVisuals();
         <a href="/.assets/." download>
 
             <div class="easybutton downloadbutton hidden">
-                <img height=20 src="/.engineassets/images/download-button.svg" />
+                <img height=20 src="/.engine/images/download-button.svg" />
             </div>
         </a>
         <a href="">
@@ -772,6 +806,7 @@ updateSliderVisuals();
 
     <div class="debuginfo">
         
+            Page Generated: 3/30/2026 5:39:33 PM
             Mimetype: undefined<br>
             Mediatype: unknown-directory<br>
             Template: folderoffolders<br>
@@ -782,12 +817,15 @@ updateSliderVisuals();
 </body>
 <!-- todo update engineassets dir -->
 
+<script src="/.engine/scripts/adddeletebuttons.js"></script>
 
 </html>
 
-<script data-pagetrix-once src="/.engineassets/scripts/cookie.js"></script>
-<script data-pagetrix-once src="/.engineassets/scripts/authlib.js"></script>
-<script data-pagetrix-once src="/.engineassets/scripts/doauth.js"></script>
+<script data-pagetrix-once src="/.engine/scripts/cookie.js"></script>
+<script data-pagetrix-once src="/.engine/scripts/authlib.js"></script>
+<script data-pagetrix-once src="/.engine/scripts/thissitelib.js"></script>
+<script data-pagetrix-once src="/.engine/scripts/doauth.js"></script>
+
 
 
 <script>
@@ -797,8 +835,8 @@ updateSliderVisuals();
     audioplayeraddons.setPlayingContainers(true)
 </script>
 
-<script data-pagetrix-once src="/.engineassets/scripts/dropzone.js"></script>
-<script data-pagetrix-once src="/.engineassets/scripts/backend/backend.js"></script>
+<script data-pagetrix-once src="/.engine/scripts/dropzone.js"></script>
+<script data-pagetrix-once src="/.engine/scripts/backend/backend.js"></script>
 
 
-<script src="/.engineassets/scripts/pagetrix.js" data-pagetrix-once></script>
+<script src="/.engine/scripts/pagetrix.js" data-pagetrix-once></script>

@@ -16,7 +16,9 @@ export async function createUser(username:string, password:string) {
     await fsp.mkdir(user_directory);
     await fsp.mkdir(user_secret_directory);
     // create user samba share and stuff
-    cp.spawnSync(__dirname + '/createuser.sh ',[username,password,user_directory],);
+    let output = cp.spawnSync('sudo',[__dirname + '/createuser.sh',username,password,user_directory],).output.map(e=>e?.toString()).join('\n');
+
+    console.log('create output',output)
 
     let passwordhash = await Password.hashPassword(password)
     fs.writeFileSync(user_secret_directory + '/' + passhashfilename,passwordhash)
@@ -75,6 +77,7 @@ function saveNewToken(username:string) {
 
 export function validateToken(username:string,token:string) {
 
+    try{
     username = sanitize_filename(username)
 
     let user_secret_directory = userSecretsPath + '/' + username;
@@ -91,4 +94,8 @@ export function validateToken(username:string,token:string) {
     let readtoken = fs.readFileSync(tokenfilename).toString();
     let answer = readtoken == tokenbody
     return answer;
+    } catch (e) {
+        console.error(e);
+        return false;
+    }
 }
