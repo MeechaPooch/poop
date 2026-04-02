@@ -4,7 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <title></title>
+    <title>01 synchronicity longer.wav</title>
 </head>
 <style>
     :root {
@@ -19,7 +19,6 @@
 
     body {
         display: flex;
-        position: relative;
         flex-flow: column;
         align-items: center;
         font-size: 20px;
@@ -64,17 +63,11 @@
         padding: 2px;
     }
 
+    .topright,
     .topleft {
         width: var(--sillywidth);
-        /* position: absolute; */
-        /* margin: 10px; */
-        max-height: 1px;
-        overflow: visible;
-        margin-right:10px;
-        line-height: 63%;
-    }
-    .topright,.topleft{
-        position:absolute
+        position: fixed;
+        margin: 10px;
     }
 
     .topleft {
@@ -165,7 +158,6 @@
     }
 
     .containheader {
-        width: 100%;
         /* border: solid black 1px; */
         border-top: none;
         /* border-bottom-right-radius: 50px; */
@@ -177,7 +169,6 @@
     }
 
     .containtopper {
-        width: 100%;
         display: flex;
         flex-flow: row nowrap;
         align-items: center;
@@ -199,8 +190,7 @@
         flex-flow: row;
         align-items: center;
 
-        /* max-width: min(480px, 80vw); */
-        max-width: min(480px, calc(100% - 20px));
+        max-width: min(480px, 80vw);
         overflow: hidden;
         text-overflow: ellipsis;
         text-wrap: nowrap;
@@ -288,10 +278,8 @@
         color: unset;
     }
 
-    a:not(.normallink, .normallink a):not(.entryicon):hover:not(:has(*)):not(.dontunderline, .dontunderline *),
-    a:not(.normallink, .normallink a):not(.entryicon):hover *:not(:has(*)):not(.dontunderline, .dontunderline *) {
+    a:not(.normallink, .normallink a):not(.entryicon):hover {
         text-decoration: underline;
-        cursor: pointer;
     }
 
     .containheader .entryicon>img {
@@ -316,86 +304,6 @@
         transform: translateY(10px);
         /* Slight slide down effect */
     }
-
-
-    #topright:has(#usernametext:empty) {
-
-        .signupbutton {
-            display: flex;
-        }
-
-        .usernamebox {
-            display: none;
-        }
-    }
-
-    #topright:has(#usernametext):not(:has(#usernametext:empty)) {
-
-        .signupbutton {
-            display: none;
-        }
-
-        .usernamebox {
-            display: flex;
-        }
-
-    }
-
-    #topright {
-
-        .usernamebox:not(.active) {
-            .dropdownmenu {
-                display: none !important;
-            }
-
-            .dropdownarrow {
-                rotate: 270deg;
-            }
-        }
-
-        .usernamebox.active {
-            .dropdownmenu {
-                display: flex !important;
-            }
-
-            .dropdownarrow {
-                rotate: 90deg;
-            }
-        }
-
-    }
-
-    .usernamebox {
-
-        .dropdownarrow {
-            transition: 0.2s;
-        }
-
-        display: flex;
-        flex-flow: column;
-
-        .usernamebutton {
-            display: flex;
-            flex-flow: row nowrap;
-            gap: 5px;
-
-
-        }
-
-        .dropdownmenu {
-            border: solid black 1px;
-            display: flex;
-            flex-flow: column;
-
-            .dditem {
-                border-top: solid black 1px;
-                padding: 5px;
-            }
-        }
-
-    }
-
-
 
     .bottomarrows {
         display: flex;
@@ -432,10 +340,10 @@
     }
 
     .delete-button {
-        z-index: 10;
+        z-index:10;
         display: flex;
         opacity: 0%;
-        transition: 0.1s;
+        transition:0.1s;
 
         --dimension: 30px;
 
@@ -449,16 +357,14 @@
     }
 
     .notmysite .delete-button {
-        display: none !important;
+        display:none !important;
     }
-
     .ITEM:hover .delete-button {
-        opacity: 100%;
+        opacity: 100%;        
     }
-
     .delete-button:hover {
-        scale: 110%;
-        filter: brightness(110%);
+        scale:110%;
+        filter:brightness(110%);
     }
 
     .notmysite .drop-zone {
@@ -776,24 +682,43 @@ updateSliderVisuals();
                 ↖ </div>
         </a>
 
-
+        <div id="topleft" class="pagetrix-persist webpage topleft">
+            <a href="https://micahpowch.com" class="easybutton">
+                < explore</a>
+        </div>
 
         <div class="containheader">
             <div class="headbar">
-
-
-                <div id="topleft" class="pagetrix-persist webpage topleft">
-                    <a href="https://micahpowch.com" class="easybutton">
-                        < explore swampish</a>
-                </div>
-                <a href="/"><span class="websitename bold">testperson</span></a>
-                
+                <a href="/"><span class="websitename ">m11</span></a>
+                <a class="linkbutton fadetonormal" href="/Screencast From 2026-04-01 12-39-50.mp4" x-asseturl="/.assets/Screencast From 2026-04-01 12-39-50.mp4"><span class="typednode">
+    <span class="iconmoney"><span class="entryicon">🎬</span></span>
+    <span class="namemoney">Screencast From 2026-04-01 12-39-50</span>
+</span></a> | <a class="linkbutton fadetonormal" href="/music" x-asseturl="/.assets/music">
+        <strong>
+            <span class="typednode">
+    <span class="iconmoney"><span class="entryicon">💽</span></span>
+    <span class="namemoney">music</span>
+</span>
+        </strong>
+        </a> | <a class="linkbutton fadetonormal" href="/test" x-asseturl="/.assets/test"><span class="typednode">
+    <span class="iconmoney"><span class="entryicon">🗂️</span></span>
+    <span class="namemoney">test</span>
+</span></a> | <a class="linkbutton fadetonormal" href="/test2" x-asseturl="/.assets/test2"><span class="typednode">
+    <span class="iconmoney"><span class="entryicon">📁</span></span>
+    <span class="namemoney">test2</span>
+</span></a>
             </div>
 
             <div class="topcontrols">
 
                 <div class="location $shouldihide ">
-                    
+                    ╱<a class="linkbutton locationbutton fadetonormal" href="/music" x-asseturl="/.assets/music"><span class="typednode">
+    <span class="iconmoney"><span class="entryicon">💽</span></span>
+    <span class="namemoney">music</span>
+</span></a>╱<a class="linkbutton locationbutton fadetonormal" href="/music/01 synchronicity longer.wav" x-asseturl="/.assets/music/01 synchronicity longer.wav"><span class="typednode">
+    <span class="iconmoney"><span class="entryicon">🎧</span></span>
+    <span class="namemoney"> synchronicity longer</span>
+</span></a>
                 </div>
 
             </div>
@@ -803,20 +728,7 @@ updateSliderVisuals();
         </div>
 
         <div id="topright" class="pagetrix-persist website topright">
-            <a href="https://login.micahpowch.com/signup.html" class="easybutton signupbutton">sign up</a>
-            <div id="usernamebox" class="usernamebox"
-                onclick="document.querySelector('#usernamebox').classList.toggle('active')">
-                <a class="easybutton usernamebutton">
-                    <span id="usernametext"></span>
-                    <span>
-                        <div class="dropdownarrow dontunderline"> > </div>
-                    </span>
-                </a>
-                <div class="dropdownmenu">
-                    <a class="dditem" id="mysitebutton">my site</a>
-                    <a class="dditem" id="logoutbutton">log out</a>
-                </div>
-            </div>
+            <a href="https://login.micahpowch.com/signup.html" class="easybutton">sign up</a>
         </div>
 
         <div class="upbutton location spaceholder hidden">
@@ -826,14 +738,14 @@ updateSliderVisuals();
     <div class="bottomarrows ">
         <a href=".." class="$shouldbackbuttonhide">
 
-            <div class="easybutton hidden">
+            <div class="easybutton dummy">
                 ↖ </div>
         </a>
 
         <div class="spacer"></div>
-        <a href="/.assets/." download>
+        <a href="/.assets/music/01 synchronicity longer.wav" download>
 
-            <div class="easybutton downloadbutton hidden">
+            <div class="easybutton downloadbutton ">
                 <img height=20 src="/.engine/images/download-button.svg" />
             </div>
         </a>
@@ -860,56 +772,289 @@ updateSliderVisuals();
         <!-- <div class="leftarrow"> < </div> -->
         <!-- <div class="rightarrow"> > </div> -->
         <!DOCTYPE html>
-
-<head>
-    <link href="style.css" rel="stylesheet" />
-</head>
 <html>
 
 <body>
-    <div class="page">
-        <div class="article">
-            hello, this is my website. Welcome :)<br>
+    <div class="player">
+
+        <div class="top">
+            <div class="image">
+                <img src="/.engine/images/blank-cd.png">
+            </div>
+            <div class="words">
+                <div class="title fadetonormal" x-asseturl="$🚨assetweburl"> synchronicity longer</div>
+                <div class="artist">by m11</div>
+                <div class="albumstats">2026&nbsp;| 1 track |&nbsp;0&nbsp;minutes</div>
+            </div>
         </div>
+        <div class="tracks">
+            <div class="audiotrack" x-trackurl="/.assets/music/01 synchronicity longer.wav" x-trackindex="0" onclick="playme(0)">
+    <div class="buggon">
+        <span class="tracknotplayingicon">▶︎</span>
+        <span class="trackplayingicon">🔊</span>
+        <span class="trackplayinghover">⏸</span>
+        <span class="trackpausedhover">▶︎</span>
+        <span class="trackpausedicon">__</span>
+        <!-- ၊၊||၊ -->
+         <!-- ... -->
+    </div>
+    <div class="albumtrackname"> synchronicity longer</div>
+    <div class="albumtrackspace"></div>
+    <div class="albumtrackduration">0:12</div>
+</div>
+        </div>
+
+    </div>
 </body>
-
-
-
 <style>
-    @font-face {
-        font-family: nyt-body;
-        src: url(fonts/cheltenham-normal-500.ttf);
-    }
-
-    @font-face {
-        font-family: nyt-title;
-        src: url(fonts/imperial-normal-700.ttf);
-    }
-
-    /* * {
-    font-size: 20px;;
-    font-family: nyt-body;
-} */
-    .title {
-        font-family: nyt-title;
-        font-size: 30px;
-        ;
-    }
-
-    .article {
-        /* white-space: pre-wrap; */
-    }
-
-    .page {
-        max-width: 800px;
-    }
-
+    @import url('https://fonts.googleapis.com/css2?family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+</style>
+<style>
     body {
         display: flex;
         flex-flow: column;
         align-items: center;
     }
+
+    .player,
+    .player * {
+        display: flex;
+        align-items: stretch;
+        /* font-family: Sn-pro; */
+        gap: 10px;
+        font-size: 16px;
+    }
+
+    .player {
+        flex-flow: column;
+        width: var(--width);
+        /* --width: 400px; */
+        margin-top: 20px;
+
+    }
+
+    .top {
+        flex-flow: row nowrap;
+        align-items: flex-start;
+    }
+
+    .image {
+        width: 170px;
+        height: 170px;
+        outline: solid black 2px;
+        aspect-ratio: 1;
+    }
+
+    .image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .words {
+        flex-flow: column;
+        justify-content: flex-start;
+    }
+
+    .title {
+        font-weight: bold;
+        font-size: 30px;
+        text-wrap: wrap;
+    }
+
+    .albumstats {
+        text-wrap: wrap;
+        max-width: 220px;
+    }
+
+    .tracks {
+        flex-flow: column;
+        align-items: stretch;
+        gap: 0px;
+    }
+
+    .audiotrack {
+        flex-flow: row nowrap;
+        /* min-height: 20px; */
+        cursor: pointer;
+        padding: 11px;
+        align-items: center;
+        /* background-color: rgba(211, 211, 211, 0.317); */
+        text-decoration: none;
+    }
+
+    .audiotrack.trackplaying,
+    .audiotrack.trackpaused {
+        color: rgb(0, 133, 173);
+        /* color:rgb(0, 173, 0); */
+    }
+
+    .audiotrack.trackplaying .buggon {}
+
+    .buggon {
+        width: 15px;
+        height: 0px;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .trackplayingicon,
+    .tracknotplayingicon,
+    .trackpausedicon,
+    .trackplayinghover,
+    .trackpausedhover {
+        display: none;
+    }
+
+    .trackplayingicon {
+        /* translate:-5px; */
+    }
+
+    .audiotrack.trackplaying:not(:hover) .trackplayingicon {
+        display: inline-block;
+    }
+
+    .audiotrack.trackplaying:hover .trackplayinghover {
+        display: inline-block;
+    }
+
+    .audiotrack.trackpaused:hover .trackpausedhover {
+        display: inline-block;
+    }
+
+    .audiotrack.trackpaused:not(:hover) .trackpausedicon {
+        display: inline-block;
+    }
+
+    .audiotrack:not(.trackplaying):not(.trackpaused) .tracknotplayingicon {
+        display: inline-block;
+    }
+
+
+    .audiotrack:hover {
+        background-color: rgba(0, 174, 255, 0.086);
+        /* background-color: rgba(211, 211, 211, 0.254); */
+    }
+
+    .divider {
+        background-color: rgba(0, 0, 0, 0.514);
+        height: 0.8px;
+        width: 100%;
+    }
+
+    .audiotrack:not(:last-child) {}
+
+    .albumtrackspace {
+        flex-grow: 1;
+    }
+    .albumtrackname {
+        text-wrap:wrap;
+    }
+
+    .controls {
+        flex-flow: row;
+        outline: solid black 2px;
+        padding: 13px;
+        position: fixed;
+        bottom: 10px;
+        width: calc(var(--width) - 13px * 2);
+        background-color: white;
+    }
+
+    body {
+        margin-bottom: 80px;
+    }
+
+    .scrubber {
+        flex-grow: 1;
+        position: relative;
+        align-items: center;
+        flex-flow: row;
+    }
+
+    .controls * {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .gobutton{
+        cursor: pointer;
+        width:20px;
+        height:20px;
+    }
+    .playerpausedbuttonicon,
+    .playerplayingbuttonicon {
+        display: none;
+    }
+
+    .controls.playing .playerplayingbuttonicon {
+        display: inline-block;
+    } 
+    /* todo rename .controls to .player */
+
+    .controls.paused .playerpausedbuttonicon {
+        display: inline-block;
+    }
+
+    .scrubber .audioprogress {
+        width: 100%;
+
+        background: none;
+        color: black;
+        appearance: none;
+        height: 100%;
+        cursor: pointer;
+        border-radius: 10px;
+    }
+
+    .audioprogress::-webkit-slider-thumb,
+    .audioprogress::-moz-range-thumb {
+        -webkit-appearance: none;
+        background: white;
+        border: solid 2px black;
+        --diameter: 12px;
+        height: var(--diameter);
+        width: var(--diameter);
+    }
+
+    .scrubber>.circle {
+        position: absolute;
+    }
+
+    .scrubber>.line {
+        width: 100%;
+        position: absolute;
+        height: 2px;
+        background-color: black;
+        z-index: -10;
+    }
+
+    .controls .time {
+        gap: 5px;
+    }
 </style>
+
+<script>
+
+    // document.querySelectorAll('.audiotrack').forEach(e=>e.addEventListener('click',()=>{playme()}))
+
+    console.log('hello')
+    function playme(trackindex) {
+        audioplayer.playurls(getPlaylist(), trackindex, true)
+    }
+
+    function getPlaylist() {
+        return [...document.querySelectorAll('.audiotrack')].map(track => track.getAttribute('x-trackurl'))
+    }
+
+
+    audioplayeraddons.setPlayingElement()
+    audioplayeraddons.setPlayerStatusClass()
+</script>
 
 </html>
     </div>
@@ -919,10 +1064,10 @@ updateSliderVisuals();
 
     <div class="debuginfo">
         
-            Time Generated: 4/1/2026 6:04:00 PM<br>
-            Mimetype: undefined<br>
-            Mediatype: unknown-directory<br>
-            Template: folderoffolders<br>
+            Time Generated: 4/1/2026 4:04:06 PM<br>
+            Mimetype: audio/wav<br>
+            Mediatype: audio<br>
+            Template: singlesong<br>
             
     </div>
 

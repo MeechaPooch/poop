@@ -13,8 +13,8 @@ export async function createUser(username:string, password:string) {
 
     let user_directory = userdirsPath + '/' + username;
     let user_secret_directory = userSecretsPath + '/' + username;
-    await fsp.mkdir(user_directory);
-    await fsp.mkdir(user_secret_directory);
+    await fsp.mkdir(user_directory,{mode:0o770});
+    await fsp.mkdir(user_secret_directory,{mode:0o770});
     // create user samba share and stuff
     let output = cp.spawnSync('sudo',[__dirname + '/createuser.sh',username,password,user_directory],).output.map(e=>e?.toString()).join('\n');
 
