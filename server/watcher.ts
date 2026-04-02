@@ -33,6 +33,7 @@ export function startWatching() {
         let username = pathparts[0];
         let contentpath = pathparts.slice(1).join('/');
 
+        if(username=='home') return;
         run(username, contentpath)
 
 
