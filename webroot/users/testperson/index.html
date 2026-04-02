@@ -51,13 +51,13 @@
     }
 
     :root {
-        --sillywidth: 100px;
+        --explorebuttonwidth: 100px;
     }
 
     .webpage {}
 
     .containtopper {
-        max-width: max(440px, calc(100vw - var(--sillywidth) * 2))
+        /* max-width: max(440px, calc(100vw - var(--sillywidth) * 2)) */
     }
 
     .webpage .easybutton {
@@ -65,16 +65,18 @@
     }
 
     .topleft {
-        width: var(--sillywidth);
+        width: var(--explorebuttonwidth);
         /* position: absolute; */
         /* margin: 10px; */
         max-height: 1px;
         overflow: visible;
-        margin-right:10px;
+        margin-right: 10px;
         line-height: 63%;
     }
-    .topright,.topleft{
-        position:absolute
+
+    .topright,
+    .topleft {
+        position: absolute
     }
 
     .topleft {
@@ -87,10 +89,17 @@
         top: 0;
     }
 
+    .headbar {
+        border-bottom: solid black 1px;
+        padding-bottom: 5px;
+        max-height: 70vw;
+        overflow: hidden;
+    }
+
     .headbar,
     .location {
 
-        min-width: 400px;
+        min-width: min(400px, 100vw);
         /* padding-bottom: 10px;; */
         display: flex;
         flex-direction: row;
@@ -113,12 +122,12 @@
 
 
     .location {
-        margin-top: 4px;
+        /* margin-top: -1px; */
         padding: 3px;
         padding-left: 10px;
         padding-right: 10px;
         /* border-radius: 20px; */
-        border-top: solid black 1px;
+        /* border-top: solid black 1px; */
     }
 
     .hidden {
@@ -160,29 +169,47 @@
         flex-grow: 1;
     }
 
+
     .websitename {
-        padding-right: 20px;
+        padding-right: 100px;
+        /* margin-left: 120px; */
+        margin-left:
+            0px;
+        /* max(calc(var(--explorebuttonwidth) - (100vw - 100cqw) / 2), 0px); */
     }
 
+    @container header-container (width > calc(100vw - var(--explorebuttonwidth) * 0.8)) {
+        .websitename{
+            margin-left: 110px;
+        }
+    }
+
+
     .containheader {
-        width: 100%;
+        margin-top: 7px;
+        max-width: 100%;
         /* border: solid black 1px; */
         border-top: none;
         /* border-bottom-right-radius: 50px; */
         /* border-bottom-left-radius: 50px; */
-        padding: 7px;
+        /* padding: 7px;
         --padding-lr: 30px;
         padding-left: var(--padding-lr);
-        padding-right: var(--padding-lr);
+        padding-right: var(--padding-lr); */
+
+        /* container-type: inline-size; */
+        container-name: header-container;
     }
 
     .containtopper {
+        max-width: max(95vw, 440px);
         width: 100%;
         display: flex;
         flex-flow: row nowrap;
         align-items: center;
         justify-content: center;
         gap: 5px;
+
     }
 
     .location {
@@ -288,8 +315,8 @@
         color: unset;
     }
 
-    a:not(.normallink, .normallink a):not(.entryicon):hover:not(:has(*)):not(.dontunderline, .dontunderline *),
-    a:not(.normallink, .normallink a):not(.entryicon):hover *:not(:has(*)):not(.dontunderline, .dontunderline *) {
+    a:not(.normallink, .normallink *):not(.entryicon):hover:not(:has(*)):not(.dontunderline, .dontunderline *),
+    a:not(.normallink, .normallink *):not(.entryicon):hover *:not(:has(*)):not(.dontunderline, .dontunderline *) {
         text-decoration: underline;
         cursor: pointer;
     }
@@ -322,6 +349,8 @@
 
         .signupbutton {
             display: flex;
+            background: white;
+            z-index: 100;
         }
 
         .usernamebox {
@@ -373,6 +402,8 @@
 
         display: flex;
         flex-flow: column;
+        min-width: 80px;
+        background:white;
 
         .usernamebutton {
             display: flex;
@@ -390,11 +421,11 @@
             .dditem {
                 border-top: solid black 1px;
                 padding: 5px;
+                text-align: center;
             }
         }
 
     }
-
 
 
     .bottomarrows {
@@ -502,6 +533,23 @@
         bottom: 30px;
         z-index: 100;
     }
+
+
+    .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-top: solid black 1px;
+        font-size: 70%;
+        display: flex;
+        flex-flow: row;
+        gap: 6px;
+        align-items: center;
+        justify-content: center;
+        background-color: white;
+        z-index: 1000;
+    }
 </style>
 
 <script data-pagetrix-once>
@@ -589,7 +637,7 @@
             outline: solid black 2px;
             padding: 13px;
             position: fixed;
-            bottom: 10px;
+            bottom: 25px;
             width: calc(var(--width) - 13px * 2);
             background-color: white;
         }
@@ -814,7 +862,7 @@ updateSliderVisuals();
                 </a>
                 <div class="dropdownmenu">
                     <a class="dditem" id="mysitebutton">my site</a>
-                    <a class="dditem" id="logoutbutton">log out</a>
+                    <a class="dditem" id="logoutbutton" onclick="AUTH.logout()">log out</a>
                 </div>
             </div>
         </div>
@@ -919,13 +967,21 @@ updateSliderVisuals();
 
     <div class="debuginfo">
         
-            Time Generated: 4/1/2026 6:04:00 PM<br>
+            Time Generated: 4/1/2026 9:59:48 PM<br>
             Mimetype: undefined<br>
             Mediatype: unknown-directory<br>
-            Template: folderoffolders<br>
+            Template: empty-root<br>
             
     </div>
+    <div class="footer">
+        <span>links:</span>
+        <a href="https://micahpowch.com/">Swampish Home</a>
+        |
+        <a href="https://docs.micahpowch.com/connecting.docx">My Site</a>
+        |
+        <a href="https://docs.micahpowch.com/connecting.docx">Connecting to your site</a>
 
+    </div>
 
 </body>
 <!-- todo update engineassets dir -->

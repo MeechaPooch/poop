@@ -35,3 +35,4 @@ export class Password {
         return crypto.timingSafeEqual(hashBuffer, encryptHash)
     }
 }
+
